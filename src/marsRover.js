@@ -26,15 +26,15 @@ function getMatrix(matrix) {
     for (let x = 0; x < directions.length; x++) {
       if (['L', 'R'].includes(directions[x])) {
         heading = actionsLookup[directions[x]](heading);
-      } else {
-        const [newRoverX, newRoverY] = actionsLookup.move({roverX, roverY, heading});
-
-        if (outOfBoundsCheck({xLength, yLength, newRoverX, newRoverY})) {
-          return `(${roverX}, ${roverY}, ${heading}) LOST`;
-        }  else {
-          [roverX, roverY] = [newRoverX, newRoverY];
-        }
+        continue;
       }
+      const [newRoverX, newRoverY] = actionsLookup.move({roverX, roverY, heading});
+
+      if (outOfBoundsCheck({xLength, yLength, newRoverX, newRoverY})) {
+        return `(${roverX}, ${roverY}, ${heading}) LOST`;
+      }
+
+      [roverX, roverY] = [newRoverX, newRoverY];      
     }
 
     return `(${roverX}, ${roverY}, ${heading})`;
@@ -43,8 +43,12 @@ function getMatrix(matrix) {
 
 const matrix = getMatrix('4 8');
 
-console.log(matrix([2, 3, 'E'], 'LFRFF'));  // (4, 4, E)
-console.log(matrix([0, 2, 'N'], 'FFLFRFF'));  // (0, 4, W) LOST
+module.exports = {
+  getMatrix
+}
 
-console.log(matrix([2, 3, 'N'], 'FLLFR'));  // (2, 3, W)
-console.log(matrix([1, 0, 'S'], 'FFRLF'));  // (1, 0, S) LOST
+// console.log(matrix([2, 3, 'E'], 'LFRFF'));  // (4, 4, E)
+// console.log(matrix([0, 2, 'N'], 'FFLFRFF'));  // (0, 4, W) LOST
+
+// console.log(matrix([2, 3, 'N'], 'FLLFR'));  // (2, 3, W)
+// console.log(matrix([1, 0, 'S'], 'FFRLF'));  // (1, 0, S) LOST
