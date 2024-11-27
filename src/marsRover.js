@@ -34,6 +34,5 @@ function marsRover(str) {
 }
 
 module.exports = {
-  parseInput,
   marsRover,
 };

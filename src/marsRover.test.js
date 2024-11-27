@@ -1,4 +1,5 @@
-const { parseInput, marsRover } = require("./marsRover");
+const { parseInput } = require('./marsRover.utils');
+const { marsRover } = require("./marsRover");
 
 describe("marsRover", () => {
   it("parseInput should process input as expected", () => {
