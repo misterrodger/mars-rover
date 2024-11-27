@@ -1,23 +1,52 @@
-const { getMatrix } = require("./marsRover");
+const { parseInput, marsRover } = require("./marsRover");
 
-describe('getMatrix', () => {
-  it('should return expected results from test case 1', () => {
-    const partial = getMatrix('4 8');
+describe('marsRover', () => {
+  it('parseInput should process input as expected', () => {
+    const input = `4 8
+(2, 3, E) LFRFF
+(0, 2, N) FFLFRFF`
+    const result = parseInput(input)
 
-    const result1 = partial([2, 3, 'E'], 'LFRFF');
-    const result2 = partial([0, 2, 'N'], 'FFLFRFF');
-  
-    expect(result1).toMatchInlineSnapshot(`"(4, 4, E)"`);
-    expect(result2).toMatchInlineSnapshot(`"(0, 4, W) LOST"`);  
+    expect(result).toMatchInlineSnapshot(`
+[
+  "4 8",
+  [
+    2,
+    3,
+    "E",
+  ],
+  "LFRFF",
+  [
+    0,
+    2,
+    "N",
+  ],
+  "FFLFRFF",
+]
+`);    
   });
 
-  it('should return expected results from test case 2', () => {
-    const partial = getMatrix('4 8');
+  it('marsRover should return expected result from test case 1', () => {
+    const input = `4 8
+(2, 3, E) LFRFF
+(0, 2, N) FFLFRFF`
+    const result = marsRover(input);
 
-    const result1 = partial([2, 3, 'N'], 'FLLFR');
-    const result2 = partial([1, 0, 'S'], 'FFRLF');
-  
-    expect(result1).toMatchInlineSnapshot(`"(2, 3, W)"`);
-    expect(result2).toMatchInlineSnapshot(`"(1, 0, S) LOST"`);  
+    expect(result).toMatchInlineSnapshot(`
+"(4, 4, E)
+(0, 4, W) LOST"
+`);
+  });
+
+  it('marsRover should return expected result from test case 2', () => {
+    const input = `4 8
+(2, 3, N) FLLFR
+(1, 0, S) FFRLF`
+    const result = marsRover(input);
+
+    expect(result).toMatchInlineSnapshot(`
+"(2, 3, W)
+(1, 0, S) LOST"
+`);
   });
 });

@@ -1,3 +1,17 @@
+const parseInput = (str) => {
+  const [dimensions, rover1Start, rover1Moves, rover2Start, rover2Moves] = str.split('(').map(each => each.split(')')).flat().map(each => each.trim());
+  const [rover1X, rover1Y, rover1Heading] = rover1Start.split(', ');
+  const [rover2X, rover2Y, rover2Heading] = rover2Start.split(', ');
+
+  return [
+    dimensions,
+    [Number(rover1X), Number(rover1Y), rover1Heading],
+    rover1Moves,
+    [Number(rover2X), Number(rover2Y), rover2Heading],
+    rover2Moves
+  ]
+}
+
 const headings = ["N", "E", "S", "W"];
 
 const moveLookup = {
@@ -40,14 +54,18 @@ function getMatrix(matrix) {
   };
 }
 
-const matrix = getMatrix("4 8");
+function marsRover(str) {
+  const [dimensions, rover1Start, rover1Moves, rover2Start, rover2Moves] = parseInput(str);
+
+  const matrix = getMatrix(dimensions);
+
+  const rover1Result = matrix(rover1Start, rover1Moves);
+  const rover2Result = matrix(rover2Start, rover2Moves);
+
+  return `${rover1Result}\n${rover2Result}`
+}
 
 module.exports = {
-  getMatrix,
+  parseInput,
+  marsRover,
 };
-
-// console.log(matrix([2, 3, 'E'], 'LFRFF'));  // (4, 4, E)
-// console.log(matrix([0, 2, 'N'], 'FFLFRFF'));  // (0, 4, W) LOST
-
-// console.log(matrix([2, 3, 'N'], 'FLLFR'));  // (2, 3, W)
-// console.log(matrix([1, 0, 'S'], 'FFRLF'));  // (1, 0, S) LOST

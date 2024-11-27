@@ -4,7 +4,9 @@
   "description": "",
   "main": "src/marsRover.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "audit": "better-npm-audit audit --level=high",
+    "lint": "eslint src/**"
   },
   "keywords": [],
   "author": "",
