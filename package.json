@@ -14,8 +14,6 @@
   "devDependencies": {
     "@types/jest": "^29",
     "better-npm-audit": "^3",
-    "eslint": "^8",
-    "eslint-plugin-functional": "^6",
     "jest": "^29"
   }
 }

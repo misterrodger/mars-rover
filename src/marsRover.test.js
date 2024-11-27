@@ -7,23 +7,13 @@ describe("marsRover", () => {
 (0, 2, N) FFLFRFF`;
     const result = parseInput(input);
 
-    expect(result).toMatchInlineSnapshot(`
-[
-  "4 8",
-  [
-    2,
-    3,
-    "E",
-  ],
-  "LFRFF",
-  [
-    0,
-    2,
-    "N",
-  ],
-  "FFLFRFF",
-]
-`);
+    expect(result).toEqual([
+      "4 8",
+      [2, 3, "E"],
+      "LFRFF",
+      [0, 2, "N"],
+      "FFLFRFF",
+    ]);
   });
 
   it("marsRover should return expected result from test case 1", () => {
